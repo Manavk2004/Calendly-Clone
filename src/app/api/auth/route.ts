@@ -7,11 +7,11 @@ const NylasConfig = {
     apiUri: process.env.NYLAS_API_URI as string,
 }
 
-const nylas = new Nylas(NylasConfig)
+export const nylas = new Nylas(NylasConfig)
 
 const AuthConfig = {
     clientId: process.env.NYLAS_CLIENT_ID as string,
-    redirectUri: "http://localhost:3000/oauth/exchange"
+    redirectUri: "http://localhost:3000/api/oauth/callback"
 }
 
 export async function GET(request: Request) {

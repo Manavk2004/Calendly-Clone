@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import TimeSelect from "./TimeSelect";
 import { WeekDayName } from "../libs/types";
 
@@ -25,8 +25,12 @@ export default function EventTypeForm(){
 
     const [ title, setTitle ] = useState<string>("")
     const [ description, setDescription ] = useState<string>("")
-    const [ Length, setLength ] = useState<string | number>(30)
+    const [ length, setLength ] = useState(30)
     const [ bookingTimes, setBookingTimes ] = useState<BookingTimes>(times) 
+
+    useEffect(() => {
+        console.log(bookingTimes)
+    }, [bookingTimes])
 
 
     function handleBookingTimeChange(day: WeekDayName, val: string, fromOrTo: 'from' | 'to'){
@@ -77,7 +81,7 @@ export default function EventTypeForm(){
                                 <TimeSelect 
                                     step={30} 
                                     value={bookingTimes !== null ? bookingTimes[day].to : ''}
-                                    onChange={val => handleBookingTimeChange(day, val, 'from')}
+                                    onChange={val => handleBookingTimeChange(day, val, 'to')}
                                 />
                             </div>
                         </div>

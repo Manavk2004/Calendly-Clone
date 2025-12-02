@@ -79,12 +79,16 @@ export default function EventTypeForm(){
                                         step={30}
                                         value={bookingTimes !== undefined ? bookingTimes[day].from : ''} 
                                         onChange={val => handleBookingTimeChange(day, val, 'from')}
+                                        SelectedDay={selectedDay}
+                                        thisDay={day}
                                     />
                                     <span>-</span>
                                     <TimeSelect 
                                         step={30} 
                                         value={bookingTimes !== null ? bookingTimes[day].to : ''}
                                         onChange={val => handleBookingTimeChange(day, val, 'to')}
+                                        SelectedDay={ selectedDay}
+                                        thisDay={day}
                                     />
                                 </div>
                             </div>

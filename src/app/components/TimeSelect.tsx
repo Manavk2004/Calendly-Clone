@@ -2,10 +2,14 @@ export default function TimeSelect({
     step,
     value,
     onChange,
+    thisDay,
+    SelectedDay
  }: { 
     step: 30 | 60 
     value: string,
     onChange: (value: string) => void,
+    thisDay: string,
+    SelectedDay: string
 }){
 
     const times = [];
@@ -19,10 +23,21 @@ export default function TimeSelect({
 
 
     return (
-        <select value={value} onChange={e => onChange(e.target.value)}>
-            {times.map((time, key) => (
-                <option key={key} value={time}>{time}</option>
-            ))}
-        </select>
+        <>
+            {thisDay === SelectedDay ? 
+                <select value={value} onChange={e => onChange(e.target.value)}>
+                    {times.map((time, key) => (
+                        <option key={key} value={time}>{time}</option>
+                    ))}
+                </select>
+            : null}
+            {thisDay !== SelectedDay ?
+                <select disabled value={value} onChange={e => onChange(e.target.value)}>
+                    {times.map((time, key) => (
+                        <option key={key} value={time}>{time}</option>
+                    ))}
+                </select>
+            : null}
+        </>
     )
 }

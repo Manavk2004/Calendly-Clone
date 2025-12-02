@@ -42,7 +42,7 @@ form label span {
 }
 
 
-form label span, spanl.label{
+form label span, span.label{
   @apply text-gray-600 text-xs font-bold uppercase
 }
 

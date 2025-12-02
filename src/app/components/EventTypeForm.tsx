@@ -2,6 +2,7 @@
 import { use, useEffect, useState } from "react";
 import TimeSelect from "./TimeSelect";
 import { WeekDayName } from "../libs/types";
+import clsx from "clsx";
 
 type BookingTimes = {
     [key in WeekDayName]: { from: string; to: string }
@@ -27,6 +28,7 @@ export default function EventTypeForm(){
     const [ description, setDescription ] = useState<string>("")
     const [ length, setLength ] = useState(30)
     const [ bookingTimes, setBookingTimes ] = useState<BookingTimes>(times) 
+    const [ selectedDay, setSelectedDay ] = useState<string>('')
 
     useEffect(() => {
         console.log(bookingTimes)
@@ -65,24 +67,26 @@ export default function EventTypeForm(){
                     </label>
                 </div>
                 <div>
-                    <span className="label">Available</span>
+                    <span className="label">Availability</span>
                     
-                    <div className="grid grid-cols-1 gap-1">
+                    <div className="grid grid-rows-1 gap-1">
                     {WeekdaysNames.map((day, key) => (
-                            <div className="flex items-center justify-between" key={day}>
-                                <span className="text-left">{day}</span>
-                                <div className="flex gap-2 items-center">
-                                <TimeSelect 
-                                    step={30}
-                                    value={bookingTimes !== undefined ? bookingTimes[day].from : ''} 
-                                    onChange={val => handleBookingTimeChange(day, val, 'from')}
-                                />
-                                <span>-</span>
-                                <TimeSelect 
-                                    step={30} 
-                                    value={bookingTimes !== null ? bookingTimes[day].to : ''}
-                                    onChange={val => handleBookingTimeChange(day, val, 'to')}
-                                />
+                        <div className="flex items-center justify-between" key={day}>
+                            <span onClick={() => setSelectedDay(day as string)} className={clsx("text-left uppercase text-sm cursor-pointer", selectedDay === day ? 'text-blue-600! font-bold': '')}>{day}</span>
+                            <div className="flex gap-2 items-center">
+                                <div>
+                                    <TimeSelect 
+                                        step={30}
+                                        value={bookingTimes !== undefined ? bookingTimes[day].from : ''} 
+                                        onChange={val => handleBookingTimeChange(day, val, 'from')}
+                                    />
+                                    <span>-</span>
+                                    <TimeSelect 
+                                        step={30} 
+                                        value={bookingTimes !== null ? bookingTimes[day].to : ''}
+                                        onChange={val => handleBookingTimeChange(day, val, 'to')}
+                                    />
+                                </div>
                             </div>
                         </div>
                     ))}

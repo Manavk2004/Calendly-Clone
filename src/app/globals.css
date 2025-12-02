@@ -22,3 +22,33 @@
 .cool-underline.show-underline::after{
   width: calc(100% + 16px)
 }
+
+
+
+form input, form select, form textarea{ 
+  @apply rounded-md p-2  bg-white border-0
+}
+
+form input, form textarea{
+  @apply w-full block
+}
+
+form label {
+  @apply mb-4 block
+}
+
+form label span {
+  @apply text-gray-600 text-xs font-bold uppercase
+}
+
+
+form label span, spanl.label{
+  @apply text-gray-600 text-xs font-bold uppercase
+}
+
+.btn-gray{
+  @apply bg-gray-200 inline-flex items-center gap-1 rounded-full px-4 py-2
+}
+.btn-blue{
+  @apply bg-blue-600 inline-flex items-center gap-1 text-white rounded-full px-4 py-2
+}
